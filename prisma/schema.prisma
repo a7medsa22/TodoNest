@@ -22,7 +22,10 @@ model User {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   tasks      Task[]
+
+  @@map("users")
 }
+
 enum UserRole {
   USER
   ADMIN
@@ -31,16 +34,27 @@ enum UserRole {
 
 model Task {
   id              Int     @id @default(autoincrement())
-  tilte           String
+  title           String
   description     String?
-  status          TaskStatus @default(OPEN)
-  userId          Int
-  user            User       @relation(fields: [userId], references: [id] )
+  status          TaskStatus  @default(PENDING)
+  priority         TaskPriorty @default(MEDIUM)
+  dueDate         DateTime?   
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
+  userId          Int
+  user            User       @relation(fields: [userId], references: [id],onDelete: Cascade )
+}
+
+enum TaskPriorty {
+   LOW
+  MEDIUM
+  HIGH
+  URGENT
+
 }
 enum TaskStatus {
-  OPEN
+ PENDING
   IN_PROGRESS
-  DONE
+  COMPLETED
+  CANCELLED
 }
