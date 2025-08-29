@@ -55,6 +55,6 @@ enum TaskPriorty {
 enum TaskStatus {
  PENDING
   IN_PROGRESS
-  COMPLETED
+  COMPELLED
   CANCELLED
 }

@@ -22,7 +22,7 @@ export class UsersService {
     });
   }
 
-  findOne(id: number):Promise<UserResponse | null> {
+  findOneUser(id: number):Promise<UserResponse | null> {
     return this.prisma.user.findUnique({where:{id},select:this.userSelect});
   }
 
